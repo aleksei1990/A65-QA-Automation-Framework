@@ -19,10 +19,10 @@ public class LoginTests extends BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
-
         String url = "https://qa.koel.app/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
+
         Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
@@ -36,6 +36,7 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(avatarIcon.isDisplayed());
         driver.quit();
     }
+
     @Test
     public void loginInvalidEmailPassword() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
@@ -44,7 +45,6 @@ public class LoginTests extends BaseTest {
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-
 
         String url = "https://qa.koel.app/";
         driver.get(url);
@@ -61,6 +61,7 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
+
     @Test
     public void loginValidEmailInvalidPassword() throws InterruptedException {
         ChromeOptions options = new ChromeOptions();
