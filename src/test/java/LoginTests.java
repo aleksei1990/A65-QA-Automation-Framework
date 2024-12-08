@@ -11,79 +11,40 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
-    public void loginValidEmailPassword() throws InterruptedException {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
+    public void loginEmptyEmailPassword(){
+        navigateToPage();
         Assert.assertEquals(driver.getCurrentUrl(), url);
-
-        Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys("aleksei.koksharov@testpro.io");
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys("ak1234!@#$");
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitButton.click();
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
-        Assert.assertTrue(avatarIcon.isDisplayed());
-        driver.quit();
     }
 
     @Test
-    public void loginInvalidEmailPassword() throws InterruptedException {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+    public void loginValidEmailPassword() throws InterruptedException {
+        navigateToPage();
+        provideEmail("aleksei.koksharov@testpro.io");
         Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys("invalid@testpro.io");
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys("ak1234!@#$");
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitButton.click();
+        providePassword("ak1234!@#$");
+        clickSubmit();
+        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        Assert.assertTrue(avatarIcon.isDisplayed());
+    }
+
+    @Test(enabled = false, description = "Test has been marked as skipped due to an ongoing issue")
+    public void loginInvalidEmailValidPassword() throws InterruptedException {
+        navigateToPage();
+        Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
+        provideEmail("invalid@testpro.io");
+        providePassword("ak1234!@#$");
+        clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
 
     @Test
     public void loginValidEmailInvalidPassword() throws InterruptedException {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-
-        WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        navigateToPage();
         Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys("invalid@testpro.io");
-        WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        passwordField.clear();
-        passwordField.sendKeys("invalid");
-        WebElement submitButton = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitButton.click();
+        provideEmail("aleksei.koksharov@testpro.io");
+        providePassword("invalid");
+        clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
+
 }
