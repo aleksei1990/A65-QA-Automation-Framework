@@ -20,7 +20,7 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailPassword() throws InterruptedException {
         navigateToPage();
         provideEmail("aleksei.koksharov@testpro.io");
-        Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
+        Thread.sleep(2000);
         providePassword("ak1234!@#$");
         clickSubmit();
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
