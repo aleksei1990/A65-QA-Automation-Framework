@@ -24,32 +24,32 @@ public class Homework17 extends BaseTest{
         Thread.sleep(2000);
         Assert.assertEquals(getSuccessMsg(), expectedMsg);
     }
-    private String getSuccessMsg(){
+    public String getSuccessMsg(){
         WebElement successMsg = driver.findElement(By.cssSelector("div.success.show"));
         return successMsg.getText();
     }
 
-    private void choosePlayList() {
+    public void choosePlayList() {
         WebElement playlist = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//li[contains(text(),'Test Playlist for HW21')]"));
         playlist.click();
     }
 
-    private void clickAddToBtn() {
+    public void clickAddToBtn() {
         WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
         addToBtn.click();
     }
 
-    private void chooseFirstSong() {
+    public void chooseFirstSong() {
         WebElement firstSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
         firstSong.click();
     }
 
-    private void clickViewAllBtn() {
+    public void clickViewAllBtn() {
         WebElement viewAllBtn = driver.findElement(By.cssSelector("button[data-test='view-all-songs-btn']"));
         viewAllBtn.click();
     }
 
-    private void searchSong(String name) {
+    public void searchSong(String name) {
         WebElement song = driver.findElement(By.cssSelector("input[type='search']"));
         song.sendKeys(name);
     }
