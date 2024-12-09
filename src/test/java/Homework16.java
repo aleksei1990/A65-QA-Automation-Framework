@@ -13,7 +13,6 @@ public class Homework16 extends BaseTest {
     @Test
     public void registrationNavigation() {
 
-        navigateToPage();
         WebElement registrationBtn = driver.findElement(By.cssSelector("a[href='registration']"));
         registrationBtn.click();
         String registrationLink = "https://qa.koel.app/registration";

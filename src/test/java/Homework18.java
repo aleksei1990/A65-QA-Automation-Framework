@@ -7,7 +7,6 @@ public class Homework18 extends BaseTest{
 
     @Test
     public void playSong() throws InterruptedException {
-        navigateToPage();
         Thread.sleep(2000);
         provideEmail("aleksei.koksharov@testpro.io");
         Thread.sleep(2000);

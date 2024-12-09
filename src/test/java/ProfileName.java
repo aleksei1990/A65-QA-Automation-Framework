@@ -9,7 +9,6 @@ public class ProfileName extends BaseTest{
 
     @Test
     public void changeProfileName() throws InterruptedException {
-        navigateToPage();
         provideEmail("aleksei.koksharov@testpro.io");
         providePassword("ak1234!@#$");
         clickSubmit();
