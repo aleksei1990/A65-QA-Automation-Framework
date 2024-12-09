@@ -12,13 +12,11 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginEmptyEmailPassword(){
-        navigateToPage();
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
     @Test
     public void loginValidEmailPassword() throws InterruptedException {
-        navigateToPage();
         provideEmail("aleksei.koksharov@testpro.io");
         Thread.sleep(2000);
         providePassword("ak1234!@#$");
@@ -29,8 +27,7 @@ public class LoginTests extends BaseTest {
 
     @Test(enabled = false, description = "Test has been marked as skipped due to an ongoing issue")
     public void loginInvalidEmailValidPassword() throws InterruptedException {
-        navigateToPage();
-        Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
+        Thread.sleep(2000);
         provideEmail("invalid@testpro.io");
         providePassword("ak1234!@#$");
         clickSubmit();
@@ -39,12 +36,17 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginValidEmailInvalidPassword() throws InterruptedException {
-        navigateToPage();
-        Thread.sleep(2000); //Added a temporary Thread.sleep for demo purposes
+        Thread.sleep(2000);
         provideEmail("aleksei.koksharov@testpro.io");
         providePassword("invalid");
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
-
+    @Test(dataProvider = "IncorrectLoginData", dataProviderClass = DataPorviderCredentials.class)
+    public void loginWithInvalidCredentials(String email, String password) throws InterruptedException {
+        provideEmail(email);
+        providePassword(password);
+        clickSubmit();
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
 }

@@ -17,10 +17,21 @@ dependencies {
 
 test {
     useTestNG() {
-//        suites "src/test/resources/TestNG.xml"
-        suites "src/test/resources/HomeWork18.xml"
-//        suites "src/test/resources/Regression.xml"//for Regression test
-//        suites "src/test/resources/Smoke.xml" //for Smoke test
-
+        suites "src/test/resources/TestNG.xml"
     }
 }
+//task testSmoke(type: Test){
+//    useTestNG(){
+//        suites "src/test/resources/Smoke.xml" //for Smoke test
+//    }
+//}
+//task testRegression(type: Test){
+//    useTestNG(){
+//        suites "src/test/resources/Regression.xml"//for Regression test
+//    }
+//}
+//task testHomeWork18(type: Test){
+//    useTestNG(){
+//        suites "src/test/resources/HomeWork18.xml"
+//    }
+//}
