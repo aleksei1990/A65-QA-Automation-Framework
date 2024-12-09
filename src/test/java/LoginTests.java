@@ -21,6 +21,7 @@ public class LoginTests extends BaseTest {
         Thread.sleep(2000);
         providePassword("ak1234!@#$");
         clickSubmit();
+        Thread.sleep(2000);
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatarIcon.isDisplayed());
     }
