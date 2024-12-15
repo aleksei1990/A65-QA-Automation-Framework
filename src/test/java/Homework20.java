@@ -1,11 +1,12 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class Homework19 extends BaseTest{
+public class Homework20 extends BaseTest{
 
     @Test
     public void deletePlayList() throws InterruptedException {
@@ -13,27 +14,22 @@ public class Homework19 extends BaseTest{
         String expectedDeleteMsg = "Deleted playlist \"Playlist 78.\"";
         String playListName = "Playlist 78";
         login("aleksei.koksharov@testpro.io", "ak1234!@#$");
-//        createPlayList(playListName);
-        Thread.sleep(2000);
+        createPlayList(playListName);
         choosePlayList(playListName);
         removeSelectedPlayList();
         Assert.assertEquals(succesMsg(), expectedDeleteMsg);
     }
 
-//    public void createPlayList(String playListName) {
-//        actions.moveToElement(playList()).perform();
-//        WebElement crtNewPlayListBtn = waitUntilClickable(By.cssSelector("ul>li[data-testid='playlist-context-menu-create-simple']"));
-//        crtNewPlayListBtn.click();
-//        crtNewPlayListBtn.sendKeys(playListName);
-//        crtNewPlayListBtn.sendKeys(Keys.ENTER);
-//
-//    }
-//
-//    public WebElement playList() {
-//        WebElement playList = waitUntilClickable(By.cssSelector("i[class='fa fa-plus-circle create']"));
-//        playList.click();
-//        return playList;
-//    }
+    public void createPlayList(String playListName) {
+
+        WebElement crtNewPlayListBtn = waitUntilClickable(By.cssSelector(".fa.fa-plus-circle.create"));
+        crtNewPlayListBtn.click();
+        WebElement newPlayListBtn = waitUntilClickable(By.cssSelector("li[data-testid='playlist-context-menu-create-simple']"));
+        newPlayListBtn.click();
+        WebElement newPlayListFieldInput = waitUntilVisible(By.cssSelector("[name='create-simple-playlist-form']>input"));
+        newPlayListFieldInput.sendKeys(playListName);
+        newPlayListFieldInput.sendKeys(Keys.ENTER);
+    }
 
     public String succesMsg(){
         WebElement msg = driver.findElement(By.cssSelector("div.success.show"));
