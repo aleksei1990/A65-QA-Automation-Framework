@@ -16,31 +16,24 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginValidEmailPassword() throws InterruptedException {
-        provideEmail("aleksei.koksharov@testpro.io");
-        Thread.sleep(2000);
-        providePassword("ak1234!@#$");
-        clickSubmit();
-        Thread.sleep(2000);
-        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+    public void loginValidEmailPassword() {
+
+        login("aleksei.koksharov@testpro.io", "ak1234!@#$");
+        WebElement avatarIcon = waitUntilVisible(By.cssSelector("img[class='avatar']"));
         Assert.assertTrue(avatarIcon.isDisplayed());
     }
 
     @Test(enabled = false, description = "Test has been marked as skipped due to an ongoing issue")
-    public void loginInvalidEmailValidPassword() throws InterruptedException {
-        Thread.sleep(2000);
-        provideEmail("invalid@testpro.io");
-        providePassword("ak1234!@#$");
-        clickSubmit();
+    public void loginInvalidEmailValidPassword() {
+
+        login("invalid@testpro.io", "ak1234!@#$");
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
     @Test
-    public void loginValidEmailInvalidPassword() throws InterruptedException {
-        Thread.sleep(2000);
-        provideEmail("aleksei.koksharov@testpro.io");
-        providePassword("invalid");
-        clickSubmit();
+    public void loginValidEmailInvalidPassword() {
+
+        login("aleksei.koksharov@testpro.io", "invalid");
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
     @Test(dataProvider = "IncorrectLoginData", dataProviderClass = DataPorviderCredentials.class)
