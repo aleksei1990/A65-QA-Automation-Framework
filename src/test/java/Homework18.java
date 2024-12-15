@@ -6,33 +6,26 @@ import org.testng.annotations.Test;
 public class Homework18 extends BaseTest{
 
     @Test
-    public void playSong() throws InterruptedException {
-        Thread.sleep(2000);
-        provideEmail("aleksei.koksharov@testpro.io");
-        Thread.sleep(2000);
-        providePassword("ak1234!@#$");
-        Thread.sleep(2000);
-        clickSubmit();
-        Thread.sleep(2000);
+    public void playSong() {
+
+        login("aleksei.koksharov@testpro.io", "ak1234!@#$");
         clickPlayNextSongBtn();
-        Thread.sleep(2000);
         clickPlayBtn();
-        Thread.sleep(2000);
         Assert.assertTrue(playingSoundBar());
     }
 
     public boolean playingSoundBar(){
-        WebElement soundBar = driver.findElement(By.cssSelector("div[data-testid='sound-bar-play']"));
+        WebElement soundBar = waitUntilVisible(By.cssSelector("div[data-testid='sound-bar-play']"));
         return soundBar.isDisplayed();
     }
 
     public void clickPlayBtn() {
-        WebElement playBtn = driver.findElement(By.cssSelector("span[data-testid='play-btn']"));
+        WebElement playBtn = waitUntilClickable(By.cssSelector("span[data-testid='play-btn']"));
         playBtn.click();
     }
 
     public void clickPlayNextSongBtn() {
-        WebElement playNextSongBtn = driver.findElement(By.cssSelector("i[data-testid='play-next-btn']"));
+        WebElement playNextSongBtn = waitUntilClickable(By.cssSelector("i[data-testid='play-next-btn']"));
         playNextSongBtn.click();
     }
 }
