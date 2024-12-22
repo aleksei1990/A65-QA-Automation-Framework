@@ -12,6 +12,7 @@ public class RenamePlayList extends BaseTest{
 
     @Test
     public void renamePlayList(){
+        
         String updatedPlayListMsg = "Updated playlist \"Sample Edited Playlist.\"";
 
         login("aleksei.koksharov@testpro.io", "ak1234!@#$");
@@ -19,16 +20,16 @@ public class RenamePlayList extends BaseTest{
         enterNewPlaylistName();
         Assert.assertEquals(getRenamePlaylistSuccessMsg(), updatedPlayListMsg);
     }
+    public String getRenamePlaylistSuccessMsg(){
+        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+        return notification.getText();
+    }
 
     public void enterNewPlaylistName() {
         WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
         playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"A", Keys.BACK_SPACE));
         playlistInputField.sendKeys(newPlaylistName);
         playlistInputField.sendKeys(Keys.ENTER);
-    }
-    public String getRenamePlaylistSuccessMsg(){
-        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        return notification.getText();
     }
 
     public void doubleclickPlaylist() {
