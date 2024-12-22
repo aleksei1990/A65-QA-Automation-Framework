@@ -13,11 +13,12 @@ import java.time.Duration;
 
 public class BaseTest {
 
-    protected WebDriver driver;
-    WebDriverWait wait;
-    protected Actions actions = null;
+    public static WebDriver driver = null;
+    public static String url = null;
+    public static WebDriverWait wait = null;
+    public static Actions actions = null;
 
-    String url = "https://qa.koel.app/";
+//    String url = "https://qa.koel.app/";
 
     @BeforeSuite
     static void setupClass() {
@@ -30,21 +31,19 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
 
-        driver.manage().window().maximize();
         url = BaseURL;
         navigateToPage();
     }
     @AfterMethod
     public void closeBrowser(){
-
         driver.quit();
     }
     public void navigateToPage(){
-
         driver.get(url);
     }
     public void provideEmail(String email) {

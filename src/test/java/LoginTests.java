@@ -1,3 +1,5 @@
+import org.example.HomePage;
+import org.example.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,9 +20,13 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPassword() {
 
-        login("aleksei.koksharov@testpro.io", "ak1234!@#$");
-        WebElement avatarIcon = waitUntilVisible(By.cssSelector("img[class='avatar']"));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+
+        loginPage.login();
+//        login("aleksei.koksharov@testpro.io", "ak1234!@#$");
+//        WebElement avatarIcon = waitUntilVisible(By.cssSelector("img[class='avatar']"));
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
     @Test(enabled = false, description = "Test has been marked as skipped due to an ongoing issue")
