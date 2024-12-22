@@ -15,7 +15,7 @@ public class BaseTest {
 
     protected WebDriver driver;
     WebDriverWait wait;
-    public Actions actions = null;
+    protected Actions actions = null;
 
     String url = "https://qa.koel.app/";
 
@@ -32,6 +32,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
 //        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        actions = new Actions(driver);
 
         driver.manage().window().maximize();
         url = BaseURL;
@@ -39,9 +40,11 @@ public class BaseTest {
     }
     @AfterMethod
     public void closeBrowser(){
+
         driver.quit();
     }
     public void navigateToPage(){
+
         driver.get(url);
     }
     public void provideEmail(String email) {
