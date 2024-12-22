@@ -22,8 +22,9 @@ public class Homework20 extends BaseTest{
 
     public void createPlayList(String playListName) {
 
-        WebElement crtNewPlayListBtn = waitUntilClickable(By.cssSelector(".fa.fa-plus-circle.create"));
-        crtNewPlayListBtn.click();
+        WebElement crtNewplayListBtn = waitUntilVisible(By.cssSelector(".fa.fa-plus-circle.create"));
+        actions.moveToElement(crtNewplayListBtn).perform();
+        crtNewplayListBtn.click();
         WebElement newPlayListBtn = waitUntilClickable(By.cssSelector("li[data-testid='playlist-context-menu-create-simple']"));
         newPlayListBtn.click();
         WebElement newPlayListFieldInput = waitUntilVisible(By.cssSelector("[name='create-simple-playlist-form']>input"));
@@ -37,14 +38,14 @@ public class Homework20 extends BaseTest{
     }
 
     public void removeSelectedPlayList() {
-        WebElement selectedPlayList = driver.findElement(By.cssSelector("button[class='del btn-delete-playlist']"));
+        WebElement selectedPlayList = driver.findElement(By.cssSelector("button.del.btn-delete-playlist"));
         selectedPlayList.click();
         WebElement okBtn = driver.findElement(By.cssSelector("button.ok"));
         okBtn.click();
     }
 
     public void choosePlayList(String playListName) {
-        WebElement playList = driver.findElement(By.cssSelector("a[href='#!/playlist/97185']"));
+        WebElement playList = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
         playList.click();
     }
 }
